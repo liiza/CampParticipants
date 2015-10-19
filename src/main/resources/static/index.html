@@ -1,0 +1,18 @@
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js" ></script>
+    <script src="js/app.js" ></script>
+</head>
+<body ng-app="app">
+<p>Show participants by organization</p>
+<div ng-controller="home">
+    <select ng-options="o.fields.Name for o in organizations track by o.id" ng-model="selectedOrganization"></select>
+    <ul>
+        <li ng-repeat="p in participants">
+            {{p.fields.Name}}
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
