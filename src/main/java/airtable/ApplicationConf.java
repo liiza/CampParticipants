@@ -16,6 +16,7 @@ public class ApplicationConf {
     @Bean
     public AirtableApiService apiService(){
         String apiKey = System.getenv("api_key");
-        return new AirtableApiService(apiKey);
+        String appId = System.getenv("app_id");
+        return new AirtableApiService(apiKey, appId);
     }
 }

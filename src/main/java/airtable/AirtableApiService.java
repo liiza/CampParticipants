@@ -9,15 +9,18 @@ import java.net.URI;
 
 public class AirtableApiService {
 
+
     @Resource
     public RestTemplate restTemplate;
 
-    private static final String BASEURL = "https://api.airtable.com/v0/appNfLDqqsUaEz7PU/";
+    private static final String BASEURL = "https://api.airtable.com/v0/";
 
-    private String apiKey;
+    private final String apiKey;
+    private final String appId;
 
-    public AirtableApiService(String apikey) {
+    public AirtableApiService(String apikey, String appId) {
         this.apiKey = apikey;
+        this.appId = appId;
     }
 
     public String makeApiRequest(String query) {
@@ -29,6 +32,6 @@ public class AirtableApiService {
     }
 
     private String queryFor(String query) {
-        return BASEURL + query + "?api_key=" + apiKey;
+        return BASEURL + appId + "/" +  query + "?api_key=" + apiKey;
     }
 }
