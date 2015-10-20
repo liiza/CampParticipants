@@ -1,0 +1,9 @@
+<p>Show participants by organization</p>
+<div ng-controller="home">
+    <select ng-options="o.fields.Name for o in organizations track by o.id" ng-model="selectedOrganization"></select>
+    <ul>
+        <li ng-repeat="p in participants">
+            {{p.fields.firstName}} {{p.fields.lastName}}
+        </li>
+    </ul>
+</div>

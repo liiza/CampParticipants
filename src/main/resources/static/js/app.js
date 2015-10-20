@@ -1,10 +1,18 @@
 var app = angular.module("app", []);
 
-app.controller('home', function($scope, httpService) {
-
+app.controller('form', function($scope, httpService){
 	function setOrganizations(response){
 		$scope.organizations = response.data.records;
 	}
+	$scope.saveParticipant = function(){
+		$scope.participant.Organization = [$scope.participant.Organization.id];
+		httpService.saveParticipant({"fields": $scope.participant}, function(response){console.log(response)});
+	}
+	httpService.fetchOrganizations(setOrganizations);
+});
+
+app.controller('home', function($scope, httpService) {
+
 	function setParticipants(participants){
 		$scope.participants = participants;
 	}
@@ -28,6 +36,7 @@ app.controller('home', function($scope, httpService) {
 
 });
 
+
 app.factory("httpService", function($http){
 	return {
 		fetchOrganizations: function(callback){
@@ -39,6 +48,11 @@ app.factory("httpService", function($http){
 			$http.get("/participants")
 				.then(callback);
 
+		},
+		saveParticipant : function(participant, callback) {
+			$http.post("/participant", participant)
+				.then(callback);
 		}
+
 	}
 });

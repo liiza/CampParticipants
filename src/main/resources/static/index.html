@@ -4,15 +4,15 @@
     <script src="js/app.js" ></script>
 </head>
 <body ng-app="app">
-<p>Show participants by organization</p>
-<div ng-controller="home">
-    <select ng-options="o.fields.Name for o in organizations track by o.id" ng-model="selectedOrganization"></select>
-    <ul>
-        <li ng-repeat="p in participants">
-            {{p.fields.Name}}
-        </li>
-    </ul>
-</div>
-
+    <div ng-controller="form">
+        First name: <br/>
+        <input ng-model="participant.firstName"/><br/>
+        Last name: <br/>
+        <input ng-model="participant.lastName"/><br/>
+        <br/>
+        <select ng-options="o.fields.Name for o in organizations track by o.id" ng-model="participant.Organization"></select>
+        <br/>
+        <button ng-click="saveParticipant()">Save</button>
+    </div>
 </body>
 </html>
