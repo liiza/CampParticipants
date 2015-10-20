@@ -2,17 +2,25 @@
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js" ></script>
     <script src="js/app.js" ></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 </head>
 <body ng-app="app">
-    <div ng-controller="form">
-        First name: <br/>
-        <input ng-model="participant.firstName"/><br/>
-        Last name: <br/>
-        <input ng-model="participant.lastName"/><br/>
-        <br/>
-        <select ng-options="o.fields.Name for o in organizations track by o.id" ng-model="participant.Organization"></select>
-        <br/>
-        <button ng-click="saveParticipant()">Save</button>
+    <div ng-controller="form" class="container" >
+        <div class="form">
+                First name: <br/>
+                <input ng-model="participant.firstName"/><br/>
+                Last name: <br/>
+                <input ng-model="participant.lastName"/><br/>
+                Age (years): <br/>
+                <input ng-model="participant.age"/><br/>
+                Allergies: <br/>
+                <input ng-model="participant.Allergies"/><br/>
+                Organization: <br/>
+                <select ng-options="o.fields.Name for o in organizations track by o.id" ng-model="participant.Organization"></select>
+                <br/>
+                <button ng-click="saveParticipant()">Save</button>
+        </div>
     </div>
 </body>
 </html>

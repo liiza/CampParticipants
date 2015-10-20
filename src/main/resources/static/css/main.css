@@ -1,0 +1,59 @@
+body {
+    background-color: rgb(169, 170, 57);
+    color: rgb(115, 116, 22);
+    font-size: 24px;
+    font-family: 'Indie Flower', cursive;
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+    border: solid 35px white;
+    border-radius: 8px;
+    background-color: rgb(221, 223, 106);
+    padding: 10px;
+}
+
+.form {
+    width: 70%;
+    margin: 5% auto;
+}
+
+input {
+    padding: 2px 5px;
+}
+input, select {
+    height: 45px;
+    width: 100%;
+    margin: 15px auto;
+    border-radius: 2px;
+    border-width: 0;
+    font-size: 24px;
+    font-family: 'Indie Flower', cursive;
+}
+option {
+    font-size: 24px;
+    font-family: 'Indie Flower', cursive;
+}
+button {
+    max-width: 80px;
+    height: 45px;
+    border-radius: 3px;
+    border-width: 0;
+    font-family: 'Indie Flower', cursive;
+    font-size: 30px;
+
+}
+/** Mobile **/
+@media (max-width: 600px){
+    .container {
+        width: 90%;
+        border: solid 5px white;
+        border-radius: 0px;
+    }
+}
+@media (max-width: 600px){
+    .form {
+        width: 100%;
+    }
+}
