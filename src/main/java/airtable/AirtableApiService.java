@@ -2,13 +2,13 @@ package airtable;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.net.URI;
 
 public class AirtableApiService {
-
 
     @Resource
     public RestTemplate restTemplate;
@@ -23,14 +23,33 @@ public class AirtableApiService {
         this.appId = appId;
     }
 
-    public String makeApiRequest(String query) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + apiKey);
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
+    public String makeGETApiRequest(String query) {
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", signRequest(new HttpHeaders()));
         return restTemplate.getForObject(queryFor(query), String.class, entity);
     }
 
+    public String makePOSTApiRequest(String query, String jsonInput) throws AirtableApiError {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity request= new HttpEntity(jsonInput, signRequest(httpHeaders));
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(queryFor(query), request, String.class);
+        if (!responseEntity.getStatusCode().is2xxSuccessful()){
+            throw new AirtableApiError();
+        }
+        return responseEntity.getBody();
+
+    }
+
+    private HttpHeaders signRequest(HttpHeaders headers) {
+        headers.set("Authorization", "Bearer " + apiKey);
+        return headers;
+
+    }
+
+
+    
     private String queryFor(String query) {
         return BASEURL + appId + "/" +  query + "?api_key=" + apiKey;
     }
